@@ -24,6 +24,8 @@ public class RecyclerVIewActivity extends AppCompatActivity {
 
     private HomeAdapter mHomeAdapter;
 
+    private StaggeredHomeAdapter mStaggeredHomeAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,8 @@ public class RecyclerVIewActivity extends AppCompatActivity {
     private void initView() {
         mRecyclerView = (RecyclerView) this.findViewById(R.id.id_recyclerview);
         //setListView();
-        setGridView();
+        //setGridView();
+        setWaterfallView();
     }
 
     private void setListView() {
@@ -69,6 +72,14 @@ public class RecyclerVIewActivity extends AppCompatActivity {
         mHomeAdapter = new HomeAdapter(this, mList);
         setLister();
         mRecyclerView.setAdapter(mHomeAdapter);
+    }
+
+    public void setWaterfallView(){
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(4,
+                StaggeredGridLayoutManager.VERTICAL));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mStaggeredHomeAdapter = new StaggeredHomeAdapter(this, mList);
+        mRecyclerView.setAdapter(mStaggeredHomeAdapter);
     }
 
     private void setLister() {
